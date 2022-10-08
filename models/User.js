@@ -34,7 +34,7 @@ const User = sequelizeConnection.define('user', {
     sequalize: sequalizeConnection,
     timestamps: false,
     freezetableName: true,
-    modelName: 'user',
+    modelName: 'User',
     underscored: true
 
 });
