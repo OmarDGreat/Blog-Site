@@ -34,7 +34,7 @@ Comment.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'User',
+            model: 'users',
             key: 'id'
         }
     },
@@ -50,8 +50,8 @@ Comment.init({
     sequelize,
     timestamps: true,
     freezetableName: true,
-    modelName: 'comments',
-    underscored: true
+    underscored: true,
+    modelName: 'comments'
 
 });
 

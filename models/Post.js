@@ -33,7 +33,7 @@ Post.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'User',
+            model: 'users',
             key: 'id'
         }
     },
@@ -41,10 +41,9 @@ Post.init({
 
 {
     sequelize,
-    timestamps: true,
     freezetableName: true,
+    underscored: true,
     modelName: 'posts',
-    underscored: true
 
 });
 
