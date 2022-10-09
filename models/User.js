@@ -1,46 +1,63 @@
+const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
+const sequelize = require('../config/connection');
 
-const Sequalize = require('sequelize');
-const sequelizeConnection = require('../config/connection.js');
-const bycrypt = require('bcrypt');
+// create our User model
+class User extends Model {
+  // set up method to run on instance data (per user) to check password
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }
+}
 
-const User = sequelizeConnection.define('user', {
-
+// create fields/columns for User model
+User.init(
+  {
     id: {
-        type: Sequalize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
     },
-
     username: {
-        type: Sequalize.STRING,
-        allowNull: false,
-        validate: {
-            len: [3, 26]
-        }
+      type: DataTypes.STRING,
+      allowNull: false
     },
-
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true
+      }
+    },
     password: {
-        type: Sequalize.STRING,
-        allowNull: false,
-        validate: {
-            len: [5, 50]
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [4]
+      }
+    }
+  },
+  {
+    hooks: {
+      // set up beforeCreate lifecycle "hook" functionality
+      async beforeCreate(newUserData) {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+
+      async beforeUpdate(updatedUserData) {
+        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        return updatedUserData;
+      }
     },
-
-},
-
-{
-    sequalize: sequalizeConnection,
+    sequelize,
     timestamps: false,
-    freezetableName: true,
-    modelName: 'User',
-    underscored: true
-
-});
-
-User.beforeCreate(async user => {
-    user.password = await bcrypt.hash(user.password, 10);
-})
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'users'
+  }
+);
 
 module.exports = User;

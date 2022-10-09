@@ -1,26 +1,68 @@
-const seedUsers = require('./user-seeds');
-const seedPosts = require('./post-seeds');
-const seedComments = require('./comment-seeds');
-const seedVotes = require('./vote-seeds');
 
-const sequelize = require('../config/connection');
 
-const seedAll = async () => {
-  await sequelize.sync({ force: true });
-  console.log('--------------');
-  await seedUsers();
-  console.log('--------------');
+const { User, Post, Comment } = require('../models');
 
-  await seedPosts();
-  console.log('--------------');
+const users = [
 
-  await seedComments();
-  console.log('--------------');
+  {
+    username: 'test',
+    password: 'test',
+    email: 'test@test.com'
+  },
+  {
+    username: 'test2',
+    password: 'test2',
+    email: 'test2@test.com'
+  },
+  {
+    username: 'test3',
+    password: 'test3',
+    email: 'test3@test.com'
+  },
+]
 
-  await seedVotes();
-  console.log('--------------');
+const posts = [
 
-  process.exit(0);
-};
+  {
+    title: 'Hello there',
+    content: 'This is my first post',
+    user_id: 1
+  },
+  {
+    title: 'Moon',
+    content: 'The moon is a planet',
+    user_id: 2
+  },
+  {
+    title: 'Sun',
+    content: 'The sun is a star',
+    user_id: 3
+  },
 
-seedAll();
+]
+
+const comments = [
+  {
+    content: 'This is a comment',
+    user_id: 1
+  },
+  {
+    content: 'This is a comment',
+    user_id: 2
+  },
+  {
+    content: 'This is a comment',
+    user_id: 3
+  },
+
+]
+    
+  const seedDatabase = async () => {
+
+  await User.bulkCreate(users);
+  await Post.bulkCreate(posts);
+  await Comment.bulkCreate(comments);
+
+}
+
+seedDatabase();

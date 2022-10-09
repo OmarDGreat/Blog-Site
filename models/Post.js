@@ -1,19 +1,20 @@
 
-const Sequalize = require('sequelize');
-const sequelizeConnection = require('../config/connection.js');
+const {Model, DataTypes} = require('sequelize');
+const sequelize = require('../config/connection.js');
 
+class Post extends Model {}
 
-const Post = sequelizeConnection.define('post', {
+Post.init({
 
     id: {
-        type: Sequalize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     },
 
     title: {
-        type: Sequalize.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
             len: [1, 100]
@@ -21,7 +22,7 @@ const Post = sequelizeConnection.define('post', {
     },
 
     content: {
-        type: Sequalize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: false,
         validate: {
             len: [1, 500]
@@ -29,7 +30,7 @@ const Post = sequelizeConnection.define('post', {
     },
 
     user_id: {
-        type: Sequalize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'User',
@@ -39,7 +40,7 @@ const Post = sequelizeConnection.define('post', {
 },
 
 {
-    sequalize: sequalizeConnection,
+    sequelize,
     timestamps: true,
     freezetableName: true,
     modelName: 'posts',

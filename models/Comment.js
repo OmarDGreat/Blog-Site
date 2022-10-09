@@ -1,19 +1,20 @@
 
-const Sequalize = require('sequelize');
-const sequelizeConnection = require('../config/connection.js');
+const {Model, DataTypes} = require('sequelize');
+const sequelize = require('../config/connection.js');
 
+class Comment extends Model {}
 
-const Comment = sequelizeConnection.define('comment', {
+Comment.init({
 
     id: {
-        type: Sequalize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     },
 
     content: {
-        type: Sequalize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: false,
         validate: {
             len: [1, 500]
@@ -21,7 +22,7 @@ const Comment = sequelizeConnection.define('comment', {
     },
 
     post_id: {
-        type: Sequalize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'posts',
@@ -30,23 +31,23 @@ const Comment = sequelizeConnection.define('comment', {
     },
 
     user_id: {
-        type: Sequalize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'users',
+            model: 'User',
             key: 'id'
         }
     },
 
     day_created: {
-        type: Sequalize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequalize.NOW
+        defaultValue: DataTypes.NOW
     },
 },
 
 {
-    sequalize: sequalizeConnection,
+    sequelize,
     timestamps: true,
     freezetableName: true,
     modelName: 'comments',
