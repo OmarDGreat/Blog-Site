@@ -7,12 +7,12 @@ const users = [
   {
     username: 'test',
     password: 'test',
-    email: 'test@test.com'
+    email: 'test@gmail.com'
   },
   {
     username: 'test2',
     password: 'test2',
-    email: 'test2@test.com'
+    email: 'test2@google.com'
   },
   {
     username: 'test3',
@@ -43,17 +43,17 @@ const posts = [
 
 const comments = [
   {
-    content: 'This is a comment',
+    comment_text: 'This is a comment',
     user_id: 1,
     post_id: 1
   },
   {
-    content: 'This is a comment',
+    comment_text: 'This is a comment',
     user_id: 2,
     post_id: 2
   },
   {
-    content: 'This is a comment',
+    comment_text: 'This is a comment',
     user_id: 3,
     post_id: 3
   },

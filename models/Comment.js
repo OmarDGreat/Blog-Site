@@ -13,14 +13,6 @@ Comment.init({
         allowNull: false
     },
 
-    content: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-        validate: {
-            len: [1, 500]
-        }
-    },
-
     post_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -44,6 +36,14 @@ Comment.init({
         allowNull: false,
         defaultValue: DataTypes.NOW
     },
+
+    comment_text: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [1]
+        }
+      },
 },
 
 {
