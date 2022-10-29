@@ -127,6 +127,7 @@ router.put('/:id', withAuth, (req, res) => {
 
 router.get('/new-post', (req, res) => {
     res.render('new-post');
+});
 
 //new-post
 router.post('/new-post', withAuth, (req, res) => {
@@ -137,5 +138,7 @@ router.post('/new-post', withAuth, (req, res) => {
     res.status(500).json(err);
   });
 });
+
+
 
 module.exports = router;
