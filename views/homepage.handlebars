@@ -1,7 +1,17 @@
-<ol>
+<ol class="post-list">
   {{#each posts as |post|}}
   <li>
-    <p href="{{post.title}}">{{post.title}}</p>
+    <article class="post">
+      <div class="title">
+        <a href="{{post.title}}">{{post.title}}</a>
+      </div>
+      <div class="meta">
+        Submitted by {{user.username}} on {{post.createdAt}}
+      |
+      <a href="/post/{{post._id}}">{{post.comments.length}} comments</a>
+      </div>
+    </article>
   </li>
   {{/each}}
 </ol>
+
