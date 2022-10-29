@@ -12,12 +12,61 @@
 <body>
   
   {{!-- New Post --}}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>New Post</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <form id="submit" method="post">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Title" name="title">
+            <label for="content">Content</label>
+            <textarea class="form-control" id="Content" rows="3" name="content"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
 
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">New Post</button>
+<br>
+<br>
 
+  {{!-- your posts --}}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>Your Posts</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <ol class="post-list">
+          {{#each posts as |post|}}
+          <li>
+            <article class="post">
+              <div class="title">
+                <a href="/single-post/{{id}}">{{post.title}}</a>
+              </div>
+              <div class="meta">
+                Submitted by {{user.username}}
+              | 
+              <a href="/single-post/{{id}}">{{post.comments.length}} comments</a>
+              </div>
+            </article>
+          </li>
+          {{/each}}
+        </ol>
+      </div>
+    </div>
 
 </body>
 </html>
+
+<script src="/javascript/new-post.js"></script>
  
   
 
