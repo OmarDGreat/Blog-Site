@@ -124,12 +124,8 @@ router.put('/:id', withAuth, (req, res) => {
     });
 });
 
-router.get('/new-post', (req, res) => {
-    res.render('new-post');
-});
-
 //new-post
-router.post('/new-post', withAuth, (req, res) => {
+router.post('/', withAuth, (req, res) => {
   Post.create({ user_id:req.session.user_id, ...req.body})
   .then(dbPostData => res.json(dbPostData))
   .catch(err => {
