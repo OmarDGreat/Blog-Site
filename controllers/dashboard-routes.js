@@ -125,14 +125,14 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 //new-post
-router.post('/', withAuth, (req, res) => {
-  Post.create({ user_id:req.session.user_id, ...req.body})
-  .then(dbPostData => res.json(dbPostData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-});
+// router.post('/', withAuth, (req, res) => {
+//   Post.create({ user_id:req.session.user_id, ...req.body})
+//   .then(dbPostData => res.json(dbPostData))
+//   .catch(err => {
+//     console.log(err);
+//     res.status(500).json(err);
+//   });
+// });
 
 
 

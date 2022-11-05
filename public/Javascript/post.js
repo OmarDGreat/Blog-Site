@@ -71,6 +71,4 @@ document.querySelector('.edit-post-form').addEventListener('submit', editFormHan
 
 document.querySelector('.delete-post-btn').addEventListener('click', deleteFormHandler);
 
-document
-  .querySelector(".new-post-form")
-  .addEventListener("submit", newFormHandler);
+document.querySelector(".new-post-form").addEventListener("submit", newFormHandler);
